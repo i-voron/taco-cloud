@@ -1,7 +1,7 @@
 package ru.voin.sia.tacos.repo;
 
 
-import ru.voin.sia.tacos.enity.Order;
+import ru.voin.sia.tacos.entity.Order;
 
 public interface OrderRepository {
 

@@ -12,8 +12,8 @@ import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import ru.voin.sia.tacos.enity.Order;
-import ru.voin.sia.tacos.enity.Taco;
+import ru.voin.sia.tacos.entity.Order;
+import ru.voin.sia.tacos.entity.Taco;
 
 @Repository
 public class JdbcOrderRepository implements OrderRepository {

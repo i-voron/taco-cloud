@@ -1,13 +1,15 @@
-package ru.voin.sia.tacos.enity;
+package ru.voin.sia.tacos.entity;
 
+import javax.persistence.Entity;
+
+@Entity
 public class Ingredient extends BaseEntity {
     private String code;
     private String name;
     private Type type;
 
-
     public Ingredient(Long id,String code, String name, Type type) {
-        super(id);
+        setId(id);
         this.code = code;
         this.name = name;
         this.type = type;

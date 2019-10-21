@@ -16,9 +16,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import ru.voin.sia.tacos.controller.DesignTacoController;
-import ru.voin.sia.tacos.enity.Taco;
-import ru.voin.sia.tacos.enity.Ingredient;
-import ru.voin.sia.tacos.enity.Ingredient.Type;
+import ru.voin.sia.tacos.entity.Taco;
+import ru.voin.sia.tacos.entity.Ingredient;
+import ru.voin.sia.tacos.entity.Ingredient.Type;
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(DesignTacoController.class)

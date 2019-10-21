@@ -1,18 +1,30 @@
-package ru.voin.sia.tacos.enity;
+package ru.voin.sia.tacos.entity;
 
+import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.PrePersist;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Date;
 import java.util.List;
 
+@Entity
 public class Taco extends BaseEntity{
+//    @ManyToMany(targetEntity=Ingredient.class)
+    @OneToMany(targetEntity=Ingredient.class)
+    @Size(min=1, message="You must choose at least 1 ingredient")
+    private List<Ingredient> ingredients;
     @NotNull
     @Size(min=2, message="Name must be at least 2 characters long")
     private String name;
-    @Size(min=1, message="You must choose at least 1 ingredient")
-    private List<Ingredient> ingredients;
     private Date createdAt;
 
+    @PrePersist
+    void createdAt() {
+        this.createdAt = new Date();
+    }
+    
     public String getName() {
         return name;
     }
@@ -36,4 +48,6 @@ public class Taco extends BaseEntity{
     public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
     }
+
+
 }

@@ -1,10 +1,8 @@
 package ru.voin.sia.tacos.repo;
 
-import ru.voin.sia.tacos.enity.Ingredient;
+import org.springframework.data.repository.CrudRepository;
+import ru.voin.sia.tacos.entity.Ingredient;
 
-public interface IngredientRepository {
-  Iterable<Ingredient> findAll();
-  Ingredient findById(Long id);
-  Ingredient findByCode(String Code);
-  Ingredient save(Ingredient ingredient);
+public interface IngredientRepository extends CrudRepository<Ingredient, String> {
 }
+

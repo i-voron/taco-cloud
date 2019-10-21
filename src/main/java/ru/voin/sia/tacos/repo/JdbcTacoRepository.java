@@ -11,8 +11,8 @@ import org.springframework.jdbc.core.PreparedStatementCreatorFactory;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
-import ru.voin.sia.tacos.enity.Ingredient;
-import ru.voin.sia.tacos.enity.Taco;
+import ru.voin.sia.tacos.entity.Ingredient;
+import ru.voin.sia.tacos.entity.Taco;
 
 @Repository
 public class JdbcTacoRepository implements TacoRepository {

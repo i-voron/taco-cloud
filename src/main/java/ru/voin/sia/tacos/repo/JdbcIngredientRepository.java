@@ -5,10 +5,10 @@ import java.sql.SQLException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
-import ru.voin.sia.tacos.enity.Ingredient;
+import ru.voin.sia.tacos.entity.Ingredient;
 
 @Repository
-public class JdbcIngredientRepository implements IngredientRepository {
+public class JdbcIngredientRepository implements IJdbcIngredientRepository {
     private JdbcTemplate jdbc;
 
     @Autowired

@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
-import ru.voin.sia.tacos.enity.Order;
+import ru.voin.sia.tacos.entity.Order;
 import ru.voin.sia.tacos.repo.OrderRepository;
 
 import javax.validation.Valid;

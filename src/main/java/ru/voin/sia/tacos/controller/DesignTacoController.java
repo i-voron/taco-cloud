@@ -5,16 +5,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
-import ru.voin.sia.tacos.enity.Order;
-import ru.voin.sia.tacos.enity.Taco;
-import ru.voin.sia.tacos.enity.Ingredient;
+import ru.voin.sia.tacos.entity.Order;
+import ru.voin.sia.tacos.entity.Taco;
+import ru.voin.sia.tacos.entity.Ingredient;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import ru.voin.sia.tacos.enity.Ingredient.Type;
+import ru.voin.sia.tacos.entity.Ingredient.Type;
+import ru.voin.sia.tacos.repo.IJdbcIngredientRepository;
 import ru.voin.sia.tacos.repo.IngredientRepository;
 import ru.voin.sia.tacos.repo.TacoRepository;
 
@@ -26,11 +26,11 @@ import javax.validation.Valid;
 public class DesignTacoController {
     private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(DesignTacoController.class);
 
-    private final IngredientRepository ingredientRepo;
+    private final IJdbcIngredientRepository ingredientRepo;
     private final TacoRepository designRepo;
 
     @Autowired
-    public DesignTacoController(IngredientRepository ingredientRepo, TacoRepository designRepo) {
+    public DesignTacoController(IJdbcIngredientRepository ingredientRepo, TacoRepository designRepo) {
         this.ingredientRepo = ingredientRepo;
         this.designRepo = designRepo;
     }
