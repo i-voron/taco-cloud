@@ -14,7 +14,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import ru.voin.sia.tacos.entity.Ingredient.Type;
-import ru.voin.sia.tacos.repo.IJdbcIngredientRepository;
 import ru.voin.sia.tacos.repo.IngredientRepository;
 import ru.voin.sia.tacos.repo.TacoRepository;
 
@@ -26,11 +25,11 @@ import javax.validation.Valid;
 public class DesignTacoController {
     private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(DesignTacoController.class);
 
-    private final IJdbcIngredientRepository ingredientRepo;
+    private final IngredientRepository ingredientRepo;
     private final TacoRepository designRepo;
 
     @Autowired
-    public DesignTacoController(IJdbcIngredientRepository ingredientRepo, TacoRepository designRepo) {
+    public DesignTacoController(IngredientRepository ingredientRepo, TacoRepository designRepo) {
         this.ingredientRepo = ingredientRepo;
         this.designRepo = designRepo;
     }
@@ -94,7 +93,7 @@ public class DesignTacoController {
             List<Ingredient> ingredients, Type type) {
         return ingredients
                 .stream()
-                .filter(x -> x.getType().equals(type))
+                .filter(x -> x.getType().equals(type.toString()))
                 .collect(Collectors.toList());
     }
 

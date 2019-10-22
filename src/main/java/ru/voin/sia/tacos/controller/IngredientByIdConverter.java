@@ -4,22 +4,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 import ru.voin.sia.tacos.entity.Ingredient;
-import ru.voin.sia.tacos.repo.IJdbcIngredientRepository;
 import ru.voin.sia.tacos.repo.IngredientRepository;
+
+import java.util.UUID;
 
 @Component
 public class IngredientByIdConverter implements Converter<String, Ingredient> {
 
-    private IJdbcIngredientRepository ingredientRepo;
+    private IngredientRepository ingredientRepo;
 
     @Autowired
-    public IngredientByIdConverter(IJdbcIngredientRepository ingredientRepo) {
+    public IngredientByIdConverter(IngredientRepository ingredientRepo) {
         this.ingredientRepo = ingredientRepo;
     }
 
     @Override
     public Ingredient convert(String id) {
-        return ingredientRepo.findById(Long.valueOf(id));
+        return ingredientRepo.findById(Long.valueOf(id)).orElse(null);
     }
 
 }

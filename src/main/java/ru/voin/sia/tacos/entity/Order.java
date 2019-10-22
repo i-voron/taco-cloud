@@ -11,10 +11,9 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(name="Taco_Order")
+@Table(name="Taco_Order", schema = "test")
 public class Order  extends BaseEntity{
-//    @ManyToMany(targetEntity=Taco.class)
-    @OneToMany(targetEntity=Taco.class)
+    @ManyToMany(targetEntity=Taco.class)
     private List<Taco> tacos = new ArrayList<>();
 
     private Date placedAt;
@@ -28,7 +27,7 @@ public class Order  extends BaseEntity{
     private String state;
     @NotBlank(message="Zip code is required")
     private String zip;
-    @CreditCardNumber(message="Not a valid credit card number")
+    @CreditCardNumber(message="Not a valid credit card number. Must be 7 digits")
     private String ccNumber;
     @Pattern(regexp="^(0[1-9]|1[0-2])([\\/])([1-9][0-9])$", message="Must be formatted MM/YY")
     private String ccExpiration;

@@ -9,15 +9,16 @@ import java.util.UUID;
 
 @MappedSuperclass
 public abstract class BaseEntity implements IEntity {
-//    @Id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Id
-    @GeneratedValue(generator = "UUID")
-    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
-    @Column(name = "uuid", updatable = false, nullable = false)
-    private UUID uuid;
+//    @Id
+//    @GeneratedValue(generator = "UUID")
+//    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
+//    @Column(name = "uuid", updatable = false, nullable = false)
+//    private UUID uuid;
+    private String  uuid;
 
     public BaseEntity() {
     }
@@ -31,14 +32,15 @@ public abstract class BaseEntity implements IEntity {
     }
 
     public UUID getUuid() {
-        return uuid;
+//        return uuid;
+        return null;
     }
 
     public void setUuid(UUID uuid) {
-        this.uuid = uuid;
+//        this.uuid = uuid;
     }
 
-    @Override
+   /* @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if ((o == null) || (o.getClass() != this.getClass())) return false;
@@ -53,8 +55,8 @@ public abstract class BaseEntity implements IEntity {
         hash = 31 * hash + (null == getUuid() ? super.hashCode() : getUuid().hashCode());
         return hash;
     }
-
-    /*@Override
+*/
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if ((o == null) || (o.getClass() != this.getClass())) return false;
@@ -68,5 +70,5 @@ public abstract class BaseEntity implements IEntity {
         int hash = 1;
         hash = 31 * hash + (null == getId() ? super.hashCode() : getId().hashCode());
         return hash;
-    }*/
+    }
 }
