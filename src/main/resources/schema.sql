@@ -1,13 +1,11 @@
 CREATE SCHEMA IF NOT EXISTS TEST;
 -- SET SCHEMA TEST;
 --
--- -- create table if not exists Ingredient (
--- create table Ingredient (
+-- create table if not exists Ingredient (
 --   id identity,
 --   uuid varchar(36),
 --   code varchar(4) not null,
 --   type varchar(10) not null,
---   types varchar(10) ,
 --   name varchar(25) not null
 -- );
 --

@@ -1,13 +1,17 @@
 package ru.voin.sia.tacos.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Ingredient", schema = "test")
+@Table(schema = "test")
 public class Ingredient extends BaseEntity {
+    @Column(length = 4)
     private String code;
+    @Column(length = 25)
     private String name;
+    @Column(length = 10)
     private String type;
 
     public Ingredient(Long id,String code, String name, String type) {

@@ -7,7 +7,7 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(name = "Taco", schema = "test")
+@Table(schema = "test")
 
 public class Taco extends BaseEntity{
     @ManyToMany(targetEntity=Ingredient.class)
@@ -15,6 +15,7 @@ public class Taco extends BaseEntity{
     private List<Ingredient> ingredients;
     @NotNull
     @Size(min=2, message="Name must be at least 2 characters long")
+    @Column(length = 50)
     private String name;
     private Date createdAt;
 

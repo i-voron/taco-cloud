@@ -11,27 +11,35 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(name="Taco_Order", schema = "test")
+@Table(name = "Orders", schema = "test")
 public class Order  extends BaseEntity{
-    @ManyToMany(targetEntity=Taco.class)
+    @OneToMany(targetEntity=Taco.class)
     private List<Taco> tacos = new ArrayList<>();
 
     private Date placedAt;
     @NotBlank(message="Name is required")
+    @Column(length = 50)
     private String name;
     @NotBlank(message="Street is required")
+    @Column(length = 50)
     private String street;
     @NotBlank(message="City is required")
+    @Column(length = 50)
     private String city;
     @NotBlank(message="State is required")
+    @Column(length = 2)
     private String state;
     @NotBlank(message="Zip code is required")
+    @Column(length = 10)
     private String zip;
     @CreditCardNumber(message="Not a valid credit card number. Must be 7 digits")
+    @Column(length = 16)
     private String ccNumber;
     @Pattern(regexp="^(0[1-9]|1[0-2])([\\/])([1-9][0-9])$", message="Must be formatted MM/YY")
+    @Column(length = 5)
     private String ccExpiration;
     @Digits(integer=3, fraction=0, message="Invalid CVV")
+    @Column(length = 3)
     private String ccCVV;
 
     @PrePersist
