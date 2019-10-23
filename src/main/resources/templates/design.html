@@ -10,11 +10,16 @@
 
 <body>
 <h1>Design your taco!</h1>
-<img th:src="@{/images/TacoCloud.png}"/>
+<h2>Feelin' hungry, <span th:text="${user.fullname}">NAME</span>?</h2>
+<img th:src="@{/images/TacoCloud.png}" width="50"/>
+<form method="POST" th:action="@{/logout}" id="logoutForm">
+    <input type="submit" value="Logout"/>
+</form>
 
 <!-- tag::formTag[] -->
 <form method="POST" th:object="${taco}">
     <!-- end::all[] -->
+    <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
 
     <span class="validationError"
           th:if="${#fields.hasErrors('ingredients')}"

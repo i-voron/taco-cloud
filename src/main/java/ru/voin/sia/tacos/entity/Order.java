@@ -15,6 +15,8 @@ import java.util.List;
 public class Order  extends BaseEntity{
     @OneToMany(targetEntity=Taco.class)
     private List<Taco> tacos = new ArrayList<>();
+    @ManyToOne
+    private User user;
 
     private Date placedAt;
     @NotBlank(message="Name is required")
@@ -45,6 +47,14 @@ public class Order  extends BaseEntity{
     @PrePersist
     void placedAt() {
         this.placedAt = new Date();
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public void addDesign(Taco design) {

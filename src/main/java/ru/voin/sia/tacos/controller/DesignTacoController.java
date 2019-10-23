@@ -9,13 +9,16 @@ import ru.voin.sia.tacos.entity.Order;
 import ru.voin.sia.tacos.entity.Taco;
 import ru.voin.sia.tacos.entity.Ingredient;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import ru.voin.sia.tacos.entity.Ingredient.Type;
+import ru.voin.sia.tacos.entity.User;
 import ru.voin.sia.tacos.repo.IngredientRepository;
 import ru.voin.sia.tacos.repo.TacoRepository;
+import ru.voin.sia.tacos.repo.UserRepository;
 
 import javax.validation.Valid;
 
@@ -27,11 +30,14 @@ public class DesignTacoController {
 
     private final IngredientRepository ingredientRepo;
     private final TacoRepository designRepo;
+    private final UserRepository userRepo;
 
     @Autowired
-    public DesignTacoController(IngredientRepository ingredientRepo, TacoRepository designRepo) {
+    public DesignTacoController(IngredientRepository ingredientRepo, TacoRepository designRepo,
+                                UserRepository userRepo) {
         this.ingredientRepo = ingredientRepo;
         this.designRepo = designRepo;
+        this.userRepo = userRepo;
     }
 
     @ModelAttribute(name = "order")
@@ -44,21 +50,8 @@ public class DesignTacoController {
     }
 
     @ModelAttribute
-    public void addIngredientsToModel(Model model) {
+    public void addIngredientsToModel(Model model, Principal principal) {
         List<Ingredient> ingredients = new ArrayList<>();
-       /*02 ingredients = Arrays.asList(
-                new Ingredient(0l,"FLTO", "Flour Tortilla", Type.WRAP),
-                new Ingredient(1l,"COTO", "Corn Tortilla", Type.WRAP),
-                new Ingredient(2l,"GRBF", "Ground Beef", Type.PROTEIN),
-                new Ingredient(3l,"CARN", "Carnitas", Type.PROTEIN),
-                new Ingredient(4l,"TMTO", "Diced Tomatoes", Type.VEGGIES),
-                new Ingredient(5l,"LETC", "Lettuce", Type.VEGGIES),
-                new Ingredient(6l,"CHED", "Cheddar", Type.CHEESE),
-                new Ingredient(7l,"JACK", "Monterrey Jack", Type.CHEESE),
-                new Ingredient(8l,"SLSA", "Salsa", Type.SAUCE),
-                new Ingredient(9l,"SRCR", "Sour Cream", Type.SAUCE)
-        );*/
-
         ingredientRepo.findAll().forEach(i -> ingredients.add(i));
 
         Type[] types = Ingredient.Type.values();
@@ -66,16 +59,18 @@ public class DesignTacoController {
             model.addAttribute(type.toString().toLowerCase(),
                     filterByType(ingredients, type));
         }
+
+        String username = principal.getName();
+        User user = userRepo.findByUsername(username);
+        model.addAttribute("user", user);
     }
 
     @GetMapping
     public String showDesignForm(Model model) {
-//02        model.addAttribute("designTaco", new Taco());
         return "design";
     }
 
     @PostMapping
-//02    public String processDesign(@Valid @ModelAttribute("designTaco") Taco design, Errors errors, Model model) {
     public String processDesign(@Valid Taco taco, Errors errors, @ModelAttribute Order order,Model model) {
         if (errors.hasErrors()) {
             return "design";

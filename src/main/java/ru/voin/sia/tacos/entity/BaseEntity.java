@@ -8,6 +8,7 @@ import java.util.Objects;
 import java.util.UUID;
 
 @MappedSuperclass
+@Table(schema = "test")
 public abstract class BaseEntity implements IEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
