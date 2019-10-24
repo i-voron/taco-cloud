@@ -1,6 +1,8 @@
 package ru.voin.sia.tacos.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 import ru.voin.sia.tacos.entity.Order;
 import ru.voin.sia.tacos.entity.User;
+import ru.voin.sia.tacos.props.OrderProps;
 import ru.voin.sia.tacos.repo.OrderRepository;
 
 import javax.validation.Valid;
@@ -20,10 +23,12 @@ public class OrderController {
     private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(OrderController.class);
 
     private OrderRepository orderRepo;
+    private OrderProps props;
 
     @Autowired
-    public OrderController(OrderRepository orderRepo) {
+    public OrderController(OrderRepository orderRepo, OrderProps props) {
         this.orderRepo = orderRepo;
+        this.props = props;
     }
 
     @GetMapping("/current")
@@ -54,7 +59,7 @@ public class OrderController {
 //        Authentication authentication =
 //                SecurityContextHolder.getContext().getAuthentication();
 //        User user = (User) authentication.getPrincipal();
-        
+
         if (errors.hasErrors()) {
             return "orderForm";
         }
@@ -62,9 +67,18 @@ public class OrderController {
 
         orderRepo.save(order);
         sessionStatus.setComplete();
-        
+
         log.info("Order submitted: " + order);
         return "redirect:/";
+    }
+
+    @GetMapping
+    public String ordersForUser(@AuthenticationPrincipal User user, Model model) {
+
+        Pageable pageable = PageRequest.of(0, props.getPageSize());
+        model.addAttribute("orders", orderRepo.findByUserOrderByPlacedAtDesc(user, pageable));
+
+        return "orderList";
     }
 
 }
